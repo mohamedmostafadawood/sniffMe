@@ -43,7 +43,7 @@ def unpackIPv4Packets(data):
     version = version_header_length >> 4 #shift right by 4 to get the version only out of the combined 8 bits
     
     
-    # If anyone is wondering why did he use (version_header_length & 15 ). Here's the reason:
+    # If anyone is wondering why did I use (version_header_length & 15 ). Here's the reason:
     #lets assume: #version_header_length = 10101101. #15 = 00001111 # bitwise representation
     #version_header_length & 15 = 00001101 which is same as 1101. So, we get the header_length only.
     
