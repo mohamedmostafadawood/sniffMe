@@ -97,7 +97,7 @@ def tcpSegment(data):
     finFlag = ( offsetAndReservedFlags & 1 ) 
     
     
-    
+    return scrPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
     
     
 
