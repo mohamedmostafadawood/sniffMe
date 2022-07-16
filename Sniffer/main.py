@@ -1,5 +1,3 @@
-from email.base64mime import header_length
-from ensurepip import version
 import socket
 import struct
 import textwrap
@@ -53,6 +51,13 @@ def unpackIPv4Packets(data):
     # So, you take this 4 bits field and convert it to decimal. The decimal number you have is how many words is our header_lenght.
     # Then, I mutliply it by 4 to convert it from words to bytes to address the start of your payload properly.
     header_length = (version_header_length & 15) * 4
+    
+    #I access the first 20 bytes which are the main compenents of the IPv4 header format.
+    #I ignore the first 8 bytes of the header as I am not interested in them now.
+    #Then, a byte for ttl, a byte for protocol, ignoring the 2 bytes of the checksum, and 4 bytes for each IP address (Source and destination).
+    ttl, ipProtocol, srcIP, dstIP = struct.unpack("! 8x B B 2x 4s 4s", data[:20])
+    
+    
     
     
     
