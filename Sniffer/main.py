@@ -1,3 +1,4 @@
+from msilib import sequence
 import socket
 import struct
 import textwrap
@@ -61,8 +62,26 @@ def unpackIPv4Packets(data):
     
     
 # Return properly formatted MAC address (Example: 192.168.1.1)
+
 def getIpAddress (ip):
     return '.'.join(map(str,ip))
+    
+
+
+# Unpakcing ICMP packets
+
+def icmpPacket(data):
+    type, code, checksum = struct.unpack("! B B H", data[:4])
+    return  type, code, checksum, data[4:]
+    
+
+# Unpacking TCP segment
+
+def tcpSegment(data):
+    scrPort, dstPort, sequenceNo, ackNo, offsetReservedFlags = struct.unpack("! H H L L H", data[:14])
+    tcpHeaderLength = (offsetReservedFlags >> 12) * 4 #shift right by 12 to get only the first 4 bits and convert it from words to bytes by *4
+    
+    
     
 
 
