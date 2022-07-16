@@ -78,8 +78,25 @@ def icmpPacket(data):
 # Unpacking TCP segment
 
 def tcpSegment(data):
-    scrPort, dstPort, sequenceNo, ackNo, offsetReservedFlags = struct.unpack("! H H L L H", data[:14])
-    tcpHeaderLength = (offsetReservedFlags >> 12) * 4 #shift right by 12 to get only the first 4 bits and convert it from words to bytes by *4
+    scrPort, dstPort, sequenceNo, ackNo, offsetAndReservedFlags = struct.unpack("! H H L L H", data[:14])
+    #offset is the same as tcp header length.
+    tcpHeaderLength = (offsetAndReservedFlags >> 12) * 4 #shift right by 12 to get only the first 4 bits and convert it from words to bytes by *4
+    
+    # for the reserved flags, they are 6 consecutive bits. To be precise, they are the last 6 bits in the 16 bits of offsetAndReservedFlags variable(It is a 2 byte one.)
+    #For example, I want to extract the URG flag bit which is the 6 bit from the last. For example this is the offsetAndReservedFlags(0100 0100 1111 1011)
+    #I need to extract the bit number 6 from last, so I will and it with a number that have only 1 at this position while the other are zeros.
+    #I will and it with 32 (0000 0000 0010 0000)
+    #Then, I will shift it 5 to the right to keep only the bit number 6 as my LSB.
+    urgFlag = ( offsetAndReservedFlags & 32 ) >> 5
+    
+    #The same process will be applied for the rest of flags but with some modifications based on flag bits' position.
+    ackFlag = ( offsetAndReservedFlags & 16 ) >> 4
+    pshFlag = ( offsetAndReservedFlags & 8 ) >> 3
+    rstFlag = ( offsetAndReservedFlags & 4 ) >> 2
+    synFlag = ( offsetAndReservedFlags & 2 ) >> 2
+    finFlag = ( offsetAndReservedFlags & 1 ) 
+    
+    
     
     
     
