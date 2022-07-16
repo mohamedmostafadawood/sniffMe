@@ -56,10 +56,13 @@ def unpackIPv4Packets(data):
     #I ignore the first 8 bytes of the header as I am not interested in them now.
     #Then, a byte for ttl, a byte for protocol, ignoring the 2 bytes of the checksum, and 4 bytes for each IP address (Source and destination).
     ttl, ipProtocol, srcIP, dstIP = struct.unpack("! 8x B B 2x 4s 4s", data[:20])
+    return version, header_length, ttl, ipProtocol, srcIP, dstIP 
     
     
     
-    
+# Return properly formatted MAC address (Example: 192.168.1.1)
+def getIpAddress (ip):
+    return '.'.join(map(str,ip))
     
 
 
