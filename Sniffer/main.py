@@ -5,6 +5,19 @@ import textwrap
 
 
 
+
+#For "\t ", it’s a tab/indent if used in a string (i.e. a sequence of characters, forming a text).
+TAB_1 = '\t - '
+TAB_2 = '\t\t - '
+TAB_3 = '\t\t\t - '
+TAB_4 = '\t\t\t\t - '
+
+DATA_TAB_1 = '\t   '
+DATA_TAB_2 = '\t\t   '
+DATA_TAB_3 = '\t\t\t   '
+DATA_TAB_4 = '\t\t\t\t   '
+
+
 def main():
     
     #For windows users, please run it with administration privileges.
@@ -18,8 +31,32 @@ def main():
     while True:
         rawData, address = conn.recvfrom(65536)
         destMac, srcMac, ethProtocol, data = unpackEthernetFrame(rawData)
-        #print("\nEthernet Frame:")
-        #print("DestinationMac {}, Source Mac {}, Ethernet Protocol {}".format(destMac, srcMac, ethProtocol))
+        print("\nEthernet Frame:")
+        print("DestinationMac {}, Source Mac {}, Ethernet Protocol {}".format(destMac, srcMac, ethProtocol))
+        
+        # In ethernet frame, if the 2 bytes related to type is 0x0800 so it is IPv4
+        if ethProtocol == 8 :
+            # The data extracted from the Ethernet Frame will be unpacked as IPv4 packet
+            version, header_length, ttl, ipProtocol, srcIP, dstIP = unpackIPv4Packets(data)
+            print(TAB_1, "IPv4 Packet:")
+            print(TAB_2, "Version {}, Header Length {}, Time to live {}".format(version, header_length, ttl))
+            print(TAB_2, "IP Protocol type {}".format(ipProtocol))
+            print(TAB_2, "Source IP {}, Destination IP {}".format(srcIP, dstIP))
+            
+            
+            
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
 # Unpacking ethernet frame
 
@@ -35,7 +72,7 @@ def getMacAddress(macAddInBytes):
     return ':'.join(strMac).upper()
 
 
-# Unpacking IPv4 packets
+# Unpacking IPv4 packets(Header)
 
 def unpackIPv4Packets(data):
     version_header_length = data[0] #because they both are 8 bits which are the first byte of the data
