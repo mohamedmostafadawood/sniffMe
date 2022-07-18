@@ -37,12 +37,14 @@ def main():
         # In ethernet frame, if the 2 bytes related to type is 0x0800 so it is IPv4
         if ethProtocol == 8 :
             # The data extracted from the Ethernet Frame will be unpacked as IPv4 packet
-            version, header_length, ttl, ipProtocol, srcIP, dstIP = unpackIPv4Packets(data)
+            version, header_length, ttl, ipProtocol, srcIP, dstIP = unpackIPv4Datagrams(data)
             print(TAB_1, "IPv4 Packet:")
             print(TAB_2, "Version {}, Header Length {}, Time to live {}".format(version, header_length, ttl))
             print(TAB_2, "IP Protocol type {}".format(ipProtocol))
             print(TAB_2, "Source IP {}, Destination IP {}".format(srcIP, dstIP))
             
+            
+            # I will check the ipProtocol variable and based on its value I can know what type of
             
             
 
@@ -72,9 +74,9 @@ def getMacAddress(macAddInBytes):
     return ':'.join(strMac).upper()
 
 
-# Unpacking IPv4 packets(Header)
+# Unpacking IPv4 Datagram(Header)
 
-def unpackIPv4Packets(data):
+def unpackIPv4Datagrams(data):
     version_header_length = data[0] #because they both are 8 bits which are the first byte of the data
     version = version_header_length >> 4 #shift right by 4 to get the version only out of the combined 8 bits
     
