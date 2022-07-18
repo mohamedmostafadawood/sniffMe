@@ -30,21 +30,29 @@ def main():
 
     while True:
         rawData, address = conn.recvfrom(65536)
-        destMac, srcMac, ethProtocol, data = unpackEthernetFrame(rawData)
+        destMac, srcMac, ethProtocol, ethernetData = unpackEthernetFrame(rawData)
         print("\nEthernet Frame:")
         print("DestinationMac {}, Source Mac {}, Ethernet Protocol {}".format(destMac, srcMac, ethProtocol))
         
         # In ethernet frame, if the 2 bytes related to type is 0x0800 so it is IPv4
         if ethProtocol == 8 :
-            # The data extracted from the Ethernet Frame will be unpacked as IPv4 packet
-            version, header_length, ttl, ipProtocol, srcIP, dstIP = unpackIPv4Datagrams(data)
-            print(TAB_1, "IPv4 Packet:")
+            # The data extracted from the Ethernet Frame will be unpacked as IPv4 datagram header
+            version, header_length, ttl, ipProtocol, srcIP, dstIP, ipv4Data = unpackIPv4Datagrams(ethernetData)
+            print(TAB_1, "IPv4 Datagram Header Info:")
             print(TAB_2, "Version {}, Header Length {}, Time to live {}".format(version, header_length, ttl))
             print(TAB_2, "IP Protocol type {}".format(ipProtocol))
             print(TAB_2, "Source IP {}, Destination IP {}".format(srcIP, dstIP))
             
             
-            # I will check the ipProtocol variable and based on its value I can know what type of
+            # I will check the ipProtocol variable and based on its value I can know the type of protocol
+            # 1 refers to ICMP
+            if ipProtocol == 1 :
+                type, code, checksum, icmpData = icmpPacket(ipv4Data)
+                print(TAB_1, "ICMP Packet Info:")
+                print(TAB_2, "ICMP Type {}, ICMP Code {}, ICMP Checksum {}".format(type, code, checksum))
+                print(TAB_2, "Data :")
+                print(formaMultiLine(DATA_TAB_3, icmpData))
+                
             
             
 
