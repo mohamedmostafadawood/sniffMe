@@ -51,17 +51,30 @@ def main():
                 print(TAB_1, "ICMP Packet Info:")
                 print(TAB_2, "ICMP Type {}, ICMP Code {}, ICMP Checksum {}".format(type, code, checksum))
                 print(TAB_2, "Data :")
-                print(formaMultiLine(DATA_TAB_3, icmpData))
+                print(formatMultiLine(DATA_TAB_3, icmpData))
                 
              # 6 refers to TCP
             elif ipProtocol ==  6:
-                srcPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data = tcpSegment(ipv4Data)
+                srcPort, dstPort, sequenceNo, ackNo, urgFlag, ackFlag, pshFlag, rstFlag, synFlag, finFlag, tcpData = tcpSegment(ipv4Data)
                 print(TAB_1 + 'TCP Segment:')
                 print(TAB_2 + 'Source Port: {}, Destination Port: {}'.format(srcPort, dstPort))
-                print(TAB_2 + 'Sequence: {}, Acknowledgment: {}'.format(tcp.sequence, tcp.acknowledgment))
+                print(TAB_2 + 'Sequence: {}, Acknowledgment: {}'.format(sequenceNo, ackNo))
                 print(TAB_2 + 'Flags:')
-                print(TAB_3 + 'URG: {}, ACK: {}, PSH: {}'.format(tcp.flag_urg, tcp.flag_ack, tcp.flag_psh))
-                print(TAB_3 + 'RST: {}, SYN: {}, FIN:{}'.format(tcp.flag_rst, tcp.flag_syn, tcp.flag_fin))
+                print(TAB_3 + 'URG: {}, ACK: {}, PSH: {}'.format(urgFlag, ackFlag, pshFlag))
+                print(TAB_3 + 'RST: {}, SYN: {}, FIN:{}'.format(rstFlag, synFlag, finFlag))
+                print(formatMultiLine(DATA_TAB_3, tcpData))
+
+             # 17 refers to UDP
+            elif ipProtocol == 17:
+                srcPort, dstPort, size, udpData = udpSegment(ipv4Data)
+                print(TAB_1 + 'UDP Segment:')
+                print(TAB_2 + 'Source Port: {}, Destination Port: {}, Length: {}'.format(srcPort, dstPort, size))
+            
+            # Other IPv4 protocols
+            else:
+                print(TAB_1 + 'Other IPv4 Data:')
+                print(formatMultiLine(DATA_TAB_2, ipv4Data))
+
 
                 
             
@@ -154,7 +167,7 @@ def tcpSegment(data):
     synFlag = ( offsetAndReservedFlags & 2 ) >> 2
     finFlag = ( offsetAndReservedFlags & 1 ) 
 
-    return srcPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
+    return srcPort, dstPort, sequenceNo, ackNo, urgFlag, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
     
     
 
@@ -170,7 +183,7 @@ def udpSegment(data):
 
 # Formatting multi-line data
 
-def formaMultiLine(prefix, string, size=80):
+def formatMultiLine(prefix, string, size=80):
     size -= len(prefix)
     if isinstance(string, bytes):
         string = ''.join(r'\x{:02x}'.format(byte) for byte in string)
