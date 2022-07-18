@@ -95,15 +95,20 @@ def tcpSegment(data):
     rstFlag = ( offsetAndReservedFlags & 4 ) >> 2
     synFlag = ( offsetAndReservedFlags & 2 ) >> 2
     finFlag = ( offsetAndReservedFlags & 1 ) 
-    
-    
+
     return scrPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
     
     
 
 
+# Unpacking UDP segments
 
-
+def udpSegment(data):
+    srcPort, dstPort, size = struct.unpack("! H H H" , data[:6])
+    return srcPort, dstPort, size, data[8:]
+    
+    
+    
 
 
 
