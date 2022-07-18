@@ -53,6 +53,17 @@ def main():
                 print(TAB_2, "Data :")
                 print(formaMultiLine(DATA_TAB_3, icmpData))
                 
+             # 6 refers to TCP
+            elif ipProtocol ==  6:
+                srcPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data = tcpSegment(ipv4Data)
+                print(TAB_1 + 'TCP Segment:')
+                print(TAB_2 + 'Source Port: {}, Destination Port: {}'.format(srcPort, dstPort))
+                print(TAB_2 + 'Sequence: {}, Acknowledgment: {}'.format(tcp.sequence, tcp.acknowledgment))
+                print(TAB_2 + 'Flags:')
+                print(TAB_3 + 'URG: {}, ACK: {}, PSH: {}'.format(tcp.flag_urg, tcp.flag_ack, tcp.flag_psh))
+                print(TAB_3 + 'RST: {}, SYN: {}, FIN:{}'.format(tcp.flag_rst, tcp.flag_syn, tcp.flag_fin))
+
+                
             
             
 
@@ -125,7 +136,7 @@ def icmpPacket(data):
 # Unpacking TCP segment
 
 def tcpSegment(data):
-    scrPort, dstPort, sequenceNo, ackNo, offsetAndReservedFlags = struct.unpack("! H H L L H", data[:14])
+    srcPort, dstPort, sequenceNo, ackNo, offsetAndReservedFlags = struct.unpack("! H H L L H", data[:14])
     #offset is the same as tcp header length.
     tcpHeaderLength = (offsetAndReservedFlags >> 12) * 4 #shift right by 12 to get only the first 4 bits and convert it from words to bytes by *4
     
@@ -143,7 +154,7 @@ def tcpSegment(data):
     synFlag = ( offsetAndReservedFlags & 2 ) >> 2
     finFlag = ( offsetAndReservedFlags & 1 ) 
 
-    return scrPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
+    return srcPort, dstPort, sequenceNo, ackNo, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
     
     
 
