@@ -1,13 +1,7 @@
 
-<h3 align="center">sniffMe</h3>
+<h3 align="center">sniffMe tool</h3>
 
-  <p align="center">
-    This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
-    <br />
-    <br />
-    <br />
 
-  </p>
 </div>
 
 
@@ -41,6 +35,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
 `github_username: @mohamedmostafadawood`, `repo_name: mohamedmostafadawood/sniffMe`,
 `twitter_handle: @mohamed_mustfa1`, `linkedin_username: @mohamedmostafadawod`,
 `email: mohamedmostafa.official0@gmail.com`
@@ -140,9 +135,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Mohamed Moustafa - [@mohamed_mustfa1](https://twitter.com/mohamed_mustfa1) - mohamedmostafa.official0@gmail.com
+[@mohamedmostafadawod](https://www.linkedin.com/in/mohamedmostafadawod/)
+Project Link: [https://github.com/mohamedmostafadawood/sniffMe](https://github.com/mohamedmostafadawood/sniffMe)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
