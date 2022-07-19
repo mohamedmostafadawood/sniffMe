@@ -102,7 +102,7 @@ def unpackIPv4Datagrams(data):
     
     
     
-# Return properly formatted MAC address (Example: 192.168.1.1)
+# Return properly formatted IP address (Example: 192.168.1.1)
 
 def getIpAddress (ip):
     return '.'.join(map(str,ip))
