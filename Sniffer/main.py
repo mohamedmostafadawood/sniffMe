@@ -1,4 +1,4 @@
-from msilib import sequence
+
 import socket
 import struct
 import textwrap
@@ -21,12 +21,8 @@ DATA_TAB_4 = '\t\t\t\t   '
 def main():
     
     #For windows users, please run it with administration privileges.
-    
-    HOST = socket.gethostbyname(socket.gethostname())
-    conn = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
-    conn.bind((HOST,0))
-    conn.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
-    conn.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
+    conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
+	
 
     while True:
         rawData, address = conn.recvfrom(65536)
@@ -128,7 +124,7 @@ def unpackIPv4Datagrams(data):
     #I ignore the first 8 bytes of the header as I am not interested in them now.
     #Then, a byte for ttl, a byte for protocol, ignoring the 2 bytes of the checksum, and 4 bytes for each IP address (Source and destination).
     ttl, ipProtocol, srcIP, dstIP = struct.unpack("! 8x B B 2x 4s 4s", data[:20])
-    return version, header_length, ttl, ipProtocol, srcIP, dstIP 
+    return version, header_length, ttl, ipProtocol, getIpAddress(srcIP) , getIpAddress(dstIP) , data[header_length:] 
     
     
     
