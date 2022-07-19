@@ -1,29 +1,20 @@
-
 import socket
 import struct
 import textwrap
-
-
-
 
 #For "\t ", it’s a tab/indent if used in a string (i.e. a sequence of characters, forming a text).
 TAB_1 = '\t - '
 TAB_2 = '\t\t - '
 TAB_3 = '\t\t\t - '
 TAB_4 = '\t\t\t\t - '
-
 DATA_TAB_1 = '\t   '
 DATA_TAB_2 = '\t\t   '
 DATA_TAB_3 = '\t\t\t   '
 DATA_TAB_4 = '\t\t\t\t   '
 
 
-def main():
-    
-    #For windows users, please run it with administration privileges.
+def main():    
     conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
-	
-
     while True:
         rawData, address = conn.recvfrom(65536)
         destMac, srcMac, ethProtocol, ethernetData = unpackEthernetFrame(rawData)
@@ -70,23 +61,6 @@ def main():
             else:
                 print(TAB_1 + 'Other IPv4 Data:')
                 print(formatMultiLine(DATA_TAB_2, ipv4Data))
-
-
-                
-            
-            
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
 # Unpacking ethernet frame
 
@@ -165,18 +139,12 @@ def tcpSegment(data):
 
     return srcPort, dstPort, sequenceNo, ackNo, urgFlag, ackFlag, pshFlag, rstFlag, synFlag, finFlag, data[tcpHeaderLength:]
     
-    
-
-
 # Unpacking UDP segments
 
 def udpSegment(data):
     srcPort, dstPort, size = struct.unpack("! H H H" , data[:6])
     return srcPort, dstPort, size, data[8:]
     
-    
-    
-
 # Formatting multi-line data
 
 def formatMultiLine(prefix, string, size=80):
