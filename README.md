@@ -96,6 +96,7 @@ sudo python3 main.py
 - [x] Unpacking UDP segments
 - [x] Displaying all of the above in a proper way
 - [ ] Add support for different types of packets like HTTP
+- [ ] Add support for windows
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
