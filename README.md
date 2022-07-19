@@ -131,8 +131,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Mohamed Moustafa - [@mohamed_mustfa1](https://twitter.com/mohamed_mustfa1) - mohamedmostafa.official0@gmail.com
-[@mohamedmostafadawod](https://www.linkedin.com/in/mohamedmostafadawod/)
+My name : Mohamed Moustafa - Twitter: [@mohamed_mustfa1](https://twitter.com/mohamed_mustfa1) - Personal Email : mohamedmostafa.official0@gmail.com
+LinkedIn: [@mohamedmostafadawod](https://www.linkedin.com/in/mohamedmostafadawod/)
 Project Link: [https://github.com/mohamedmostafadawood/sniffMe](https://github.com/mohamedmostafadawood/sniffMe)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
