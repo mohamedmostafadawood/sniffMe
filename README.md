@@ -1,1 +1,1 @@
-# sniffMe
+# sniffMe tool
