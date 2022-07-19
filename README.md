@@ -4,7 +4,6 @@
   <p align="center">
     This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
     <br />
 
@@ -35,7 +34,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
