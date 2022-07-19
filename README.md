@@ -35,7 +35,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
+This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic to monitor network traffic for suspicious activity, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
