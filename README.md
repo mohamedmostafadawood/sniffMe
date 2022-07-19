@@ -36,10 +36,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 This is a simple ‘network traffic analyzing’ or ‘packet sniffing' tool that can help you to keep an eye on all incoming and outgoing traffic, network activity, and availability because finding out that you are a victim of a cyberattack or early flagging of threats could lead to better results.
-`github_username: @mohamedmostafadawood`, `repo_name: mohamedmostafadawood/sniffMe`,
-`twitter_handle: @mohamed_mustfa1`, `linkedin_username: @mohamedmostafadawod`,
-`email: mohamedmostafa.official0@gmail.com`
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
